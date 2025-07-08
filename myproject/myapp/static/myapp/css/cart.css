@@ -1,0 +1,111 @@
+/* Base styles */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
+  color: #212529;
+}
+
+/* Headings */
+h2, h4 {
+  font-weight: 600;
+  color: #0077b6;
+}
+
+/* Card container styles */
+.card {
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 1s ease;
+  background: linear-gradient(270deg, #a7c7e7, #8ac7e0, #7ab4d9);
+  background-size: 600% 600%;
+  animation: subtleGradientShift 20s ease infinite;
+  color: #03396c;
+}
+
+/* Hover animation like hero section */
+.card:hover {
+  background: linear-gradient(270deg, #89c2d9, #00b4d8, #0077b6);
+  background-size: 600% 600%;
+  animation: gradientShift 6s ease infinite;
+  transform: translateY(-6px);
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+/* Force text and button color on hover */
+.card:hover .card-body,
+.card:hover .card-title,
+.card:hover .card-text,
+.card:hover p,
+.card:hover strong {
+  color: white !important;
+}
+
+.card:hover .btn-primary {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  color: white;
+}
+
+/* Card image */
+.card-img-top {
+  object-fit: cover;
+  height: 200px;
+}
+
+/* Summary box */
+.card.p-4 {
+  background-color: white;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+}
+
+.card.p-4 h4 {
+  color: #023e8a;
+}
+
+/* Buttons */
+.btn-success {
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.75rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+  background-color: #00b4d8;
+  transform: scale(1.02);
+}
+
+/* List groups */
+.list-group-item {
+  background-color: transparent;
+  border: none;
+  font-size: 0.95rem;
+}
+
+/* Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes subtleGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 150px;
+  }
+
+  .btn-success {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+}

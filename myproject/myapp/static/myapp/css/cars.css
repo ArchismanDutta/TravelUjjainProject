@@ -1,0 +1,45 @@
+/* Hero Section */
+.hero-wrapper {  
+  background: linear-gradient(270deg, #89c2d9, #00b4d8, #0077b6);
+  background-size: 600% 600%;
+  animation: gradientShift 10s ease infinite;
+  color: white;
+  border-radius: 100px;
+  padding: 2rem 3rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.3s ease;
+  margin: 3rem auto;
+  max-width: 800px;
+  text-align: center;
+
+}
+
+.hero-wrapper:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.85);
+}
+
+.hero-text h2,
+.hero-text p {
+  animation: fadeSlideUp 1s ease forwards;
+}
+
+.hero-text p:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tour Add-Ons | TravelSphere</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'myapp/css/addons.css' %}">
+</head>
+
+<body class="bg-light text-dark">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm border-bottom sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">TravelSphere</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'packages' %}">Packages</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'cars' %}">Cars</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{% url 'addons' %}">Add-Ons</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Cart</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="container hero-wrapper mt-5">
+    <div class="hero-text text-center">
+      <h2 class="mb-2">Our Photography Add-Ons</h2>
+      <p>Enhance your trip with professional photography and optional reel edits.</p>
+    </div>
+  </div>
+
+  <!-- Add-ons Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        {% for addon in addons %}
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            {% if addon.image %}
+              <img src="{{ addon.image.url }}" class="card-img-top" alt="{{ addon.title }}">
+            {% else %}
+              <img src="{% static 'myapp/images/default-addon.jpg' %}" class="card-img-top" alt="No Image">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ addon.title }}</h5>
+              <p class="card-text">{{ addon.description }}</p>
+              <p><strong>Photography Type:</strong> {{ addon.get_photograph_type_display }}</p>
+              <p><strong>Base Price:</strong> ₹{{ addon.price }}</p>
+              {% if addon.reel_edit %}
+                <p><strong>Reel Editing:</strong> Included</p>
+                <p><strong>Reel Edit Price:</strong> ₹{{ addon.reel_edit_price }}</p>
+              {% else %}
+                <p><strong>Reel Editing:</strong> Not included</p>
+              {% endif %}
+              <p class="fw-bold text-primary">Total: ₹{{ addon.total_price }}</p>
+
+              <form method="post" action="{% url 'add_to_cart' 'addon' addon.id %}" class="mt-auto">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="text-center text-muted">No add-ons available at the moment.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white text-center border-top py-4 text-muted small">
+    <div class="container">
+      &copy; 2025 TravelSphere. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

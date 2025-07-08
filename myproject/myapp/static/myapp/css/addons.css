@@ -1,0 +1,124 @@
+/* Hero Section */
+.hero-wrapper {  
+  background: linear-gradient(270deg, #89c2d9, #00b4d8, #0077b6);
+  background-size: 600% 600%;
+  animation: gradientShift 10s ease infinite;
+  color: white;
+  border-radius: 100px;
+  padding: 2rem 3rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.3s ease;
+  margin: 3rem auto;
+  max-width: 800px;
+  text-align: center;
+  
+
+}
+
+.hero-wrapper:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.85);
+}
+
+.hero-text h2,
+.hero-text p {
+  animation: fadeSlideUp 1s ease forwards;
+}
+
+.hero-text p:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* ----------------Cards---------------------------- */
+
+/* CARD STYLES: Default animated gradient + hero-style hover */
+.card {
+  border: none;
+  background: linear-gradient(270deg, #a7c7e7, #8ac7e0, #7ab4d9);
+  background-size: 600% 600%;
+  animation: subtleGradientShift 20s ease infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.8s ease;
+  color: #03396c;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Hover: Stronger gradient like hero */
+.card:hover {
+  background: linear-gradient(270deg, #89c2d9, #00b4d8, #0077b6) !important;
+  background-size: 600% 600%;
+  animation: gradientShift 6s ease infinite !important;
+  color: white !important;
+  transform: translateY(-6px);
+  box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.5);
+}
+
+/* Force text color change inside card */
+.card:hover .card-body,
+.card:hover .card-title,
+.card:hover .card-text,
+.card:hover p,
+.card:hover strong {
+  color: white !important;
+}
+
+/* Button styling on hover */
+.card:hover .btn-primary {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  color: white;
+}
+
+/* Idle gradient animation */
+@keyframes subtleGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Active hover animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideUp 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart | TravelSphere</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'myapp/css/cart.css' %}">
+</head>
+<body class="bg-light text-dark">
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm border-bottom sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">LOGO</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'packages' %}">Packages</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'cars' %}">Cars</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'addons' %}">Add-Ons</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-5">
+  <h2 class="text-center mb-5">Your Travel Cart</h2>
+
+  <div class="row g-4">
+    <!-- Travel Package -->
+    <div class="col-md-4">
+      <div class="card shadow h-100">
+        <img src="{{ cart.travel_package.image.url }}" class="card-img-top" alt="{{ cart.travel_package.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ cart.travel_package.title }}</h5>
+          <p class="card-text">{{ cart.travel_package.description }}</p>
+          <p><strong>Price:</strong> ₹{{ cart.travel_package.price }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Car -->
+    <div class="col-md-4">
+      <div class="card shadow h-100">
+        <img src="{{ cart.car.image.url }}" class="card-img-top" alt="{{ cart.car.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ cart.car.name }}</h5>
+          <p class="card-text">{{ cart.car.description }}</p>
+          <p><strong>Price:</strong> ₹{{ cart.car.price }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add-Ons -->
+    <div class="col-md-4">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="card-title">Add-Ons</h5>
+          {% if cart.addons.all %}
+            <ul class="list-group list-group-flush">
+              {% for addon in cart.addons.all %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>{{ addon.title }}</strong><br>
+                  <small>{{ addon.description }}</small>
+                </div>
+                <span>₹{{ addon.total_price }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No add-ons selected.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <div class="card p-4 shadow">
+        <h4 class="mb-3">Order Summary</h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Package:</span>
+            <strong>₹{{ cart.travel_package.price }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Car:</span>
+            <strong>₹{{ cart.car.price }}</strong>
+          </li>
+          {% for addon in cart.addons.all %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>{{ addon.title }}</span>
+            <strong>₹{{ addon.total_price }}</strong>
+          </li>
+          {% endfor %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong class="text-primary fs-5">₹{{ cart.calculate_total }}</strong>
+          </li>
+        </ul>
+
+        <!-- Proceed to Payment Button -->
+        <form method="post" action="{% url 'checkout' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success w-100">Proceed to Payment</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
