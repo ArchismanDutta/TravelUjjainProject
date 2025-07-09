@@ -2,56 +2,35 @@ body {
   font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-/* -------------------------------- */
+/* ------------------ Hero Section ------------------ */
 .hero-wrapper {
   background: linear-gradient(270deg, #89c2d9, #00b4d8, #0077b6);
   background-size: 600% 600%;
   animation: gradientShift 10s ease infinite;
   color: white;
-
-  /* Capsule shape */
-  border-radius: 100px; 
+  border-radius: 100px;
   padding: 2rem 3rem;
   box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.6);
   transition: box-shadow 0.3s ease;
 }
-
 .hero-wrapper:hover {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.85);
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
 .hero-text p, .hero-text h2, .hero-text a {
   animation: fadeSlideUp 1s ease forwards;
 }
-.hero-text p:nth-child(2),
-.hero-text a {
+.hero-text p:nth-child(2), .hero-text a {
   animation-delay: 0.5s;
 }
 
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/*------------------------------ carousel-------------------------------------- */
+/* ------------------ Carousel ------------------ */
 .carousel-item img {
   height: 250px;
   object-fit: contain;
 }
 
-/* Gradient Background Animation */
+/* ------------------ Gradient Background ------------------ */
 .gradient-bg {
   background: linear-gradient(270deg, #89c2d9, #00b4d8, #0077b6);
   background-size: 600% 600%;
@@ -62,68 +41,33 @@ body {
   box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.6);
   transition: box-shadow 0.3s ease;
 }
-
 .gradient-bg:hover {
   box-shadow: 0 1rem 2rem rgba(0,0,0,0.85);
 }
 
+/* ------------------ Side Panel ------------------ */
+side-panel {
+  width: 300px; 
+  display: none;
+   z-index: 1050;
+  
+}
+
+.side-panel.open {
+  right: 0;              /* Slide in from right */
+}
+#userSidePanel {
+  transition: transform 0.5s ease-in-out;
+}
+
+
+/* ------------------ Text Animation ------------------ */
 @keyframes gradientShift {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* Text fade-in and slight slide-up animation */
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animated-text > div {
-  animation: fadeSlideUp 1s ease forwards;
-}
-
-.animated-text > div:nth-child(2) {
-  animation-delay: 0.5s;
-}
-
-
-.navbar-brand {
-  font-weight: 600;
-  font-size: 1.6rem;
-}
-
-/*------------------------------ About us------------------------------------ */
-/* Gradient Background Animation */
-.gradient-bg {
-  background: linear-gradient(270deg, #89c2d9, #00b4d8, #0077b6);
-  background-size: 600% 600%;
-  animation: gradientShift 10s ease infinite;
-  color: white; /* ensure text stays white */
-  border-radius: 0.5rem; /* match Bootstrap's rounded */
-  padding: 1.5rem;
-  box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.6);
-  transition: box-shadow 0.3s ease;
-}
-
-.gradient-bg:hover {
-  box-shadow: 0 1rem 2rem rgba(0,0,0,0.85);
-}
-
-/* Gradient animation keyframes */
-@keyframes gradientShift {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-/* Text fade-in and slight slide-up animation */
 @keyframes fadeSlideUp {
   0% {
     opacity: 0;
@@ -138,8 +82,11 @@ body {
 .animated-text p {
   animation: fadeSlideUp 1s ease forwards;
 }
-
 .animated-text p:nth-child(2) {
   animation-delay: 0.5s;
 }
 
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.6rem;
+}

@@ -25,36 +25,68 @@
           <li class="nav-item"><a class="nav-link" href="/addons/">Add-Ons</a></li>
           <li class="nav-item"><a class="nav-link" href="/cart/">Cart</a></li>
           <li class="nav-item"><a class="nav-link" href="/aboutus/">About Us</a></li>
+          
         
           <li class="nav-item">
 
 
-  {% if user.is_authenticated %}
-    <a class="btn btn-danger text-white ms-3" href="{% url 'packages' %}">Book Trip</a>
-  {% else %}
-    <a class="btn btn-danger text-white ms-3" href="{% url 'login' %}?next={% url 'packages' %}">Book Trip</a>
-  {% endif %}
-</li>
+            {% if user.is_authenticated %}
+              <a class="btn btn-danger text-white ms-3" href="{% url 'packages' %}">Book Trip</a>
+            {% else %}
+              <a class="btn btn-danger text-white ms-3" href="{% url 'login' %}?next={% url 'packages' %}">Book Trip</a>
+            {% endif %}
+          </li>
 
-        {% if user.is_authenticated %}
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link text-success" href="{% url 'dashboard' %}">Hi, {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item me-2">
+              <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary" href="{% url 'signup' %}">Sign Up</a>
+            </li>
+          {% endif %}
+
+          <!-- User Panel Toggle Button -->
           <li class="nav-item">
-              <a class="nav-link text-success" href="{% url 'dashboard' %}">Hi, {{ user.username }}</a>
+            <button class="btn btn-outline-secondary ms-3" id="userPanelToggle">☰</button>
           </li>
-          <li class="nav-item">
-              <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
-          </li>
-        {% else %}
-          <li class="nav-item me-2">
-            <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-primary" href="{% url 'signup' %}">Sign Up</a>
-          </li>
-        {% endif %}
+
       </ul>
     </div>
   </div>
 </nav>
+
+
+<!-- Side Panel -->
+<div id="userSidePanel" 
+     class="side-panel bg-white shadow position-fixed top-0 end-0 h-100" 
+     style="width: 300px; display: none; z-index: 1050;">
+  <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+    <strong>User Menu</strong>
+    <button class="btn-close" id="closeSidePanel"></button>
+  </div>
+  <div class="p-4 text-start">
+    {% if user.is_authenticated %}
+      <p class="fw-bold mb-3">Hi, {{ user.username }}</p>
+      <a href="{% url 'dashboard' %}" class="d-block mb-2">Profile</a>
+      <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="d-block mb-2">Login</a>
+      <a href="{% url 'signup' %}" class="btn btn-primary btn-sm">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+
+
+
+
 
 <section class="py-5 border-bottom bg-light">
   <div class="container">
