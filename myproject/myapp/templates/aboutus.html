@@ -6,7 +6,7 @@
   <title>About Us | TravelSphere</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'myapp/css/about.css' %}">
+  <link rel="stylesheet" href="{% static 'myapp/css/aboutus.css' %}">
 </head>
 
 <body class="bg-light text-dark">
@@ -25,11 +25,59 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'cars' %}">Cars</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'addons' %}">Add-Ons</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">Cart</a></li>
-          <li class="nav-item"><a class="nav-link active" href="#">About Us</a></li>
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+              <a class="btn btn-danger text-white ms-3" href="{% url 'packages' %}">Book Trip</a>
+            {% else %}
+              <a class="btn btn-danger text-white ms-3" href="{% url 'login' %}?next={% url 'packages' %}">Book Trip</a>
+            {% endif %}
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link text-success" href="{% url 'dashboard' %}">Hi, {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item me-2">
+              <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary" href="{% url 'signup' %}">Sign Up</a>
+            </li>
+          {% endif %}
+
+          <!-- User Panel Toggle Button -->
+          <li class="nav-item">
+            <button class="btn btn-outline-secondary ms-3" id="userPanelToggle">☰</button>
+          </li>
+
         </ul>
       </div>
     </div>
   </nav>
+
+  <!-- Side Panel -->
+<div id="userSidePanel" 
+     class="side-panel bg-white shadow position-fixed top-0 end-0 h-100" 
+     style="width: 300px; display: none; z-index: 1050;">
+  <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+    <strong>User Menu</strong>
+    <button class="btn-close" id="closeSidePanel"></button>
+  </div>
+  <div class="p-4 text-start">
+    {% if user.is_authenticated %}
+      <p class="fw-bold mb-3">Hi, {{ user.username }}</p>
+      <a href="{% url 'dashboard' %}" class="d-block mb-2">Profile</a>
+      <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="d-block mb-2">Login</a>
+      <a href="{% url 'signup' %}" class="btn btn-primary btn-sm">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+
 
   <!-- Hero Section -->
   <div class="container hero-wrapper mt-5 text-center">
@@ -87,5 +135,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'myapp/js/aboutus.js' %}"></script>
 </body>
 </html>

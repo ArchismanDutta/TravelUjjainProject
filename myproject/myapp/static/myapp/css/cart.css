@@ -109,3 +109,18 @@ h2, h4 {
     padding: 0.65rem;
   }
 }
+
+/* ------------------ Side Panel ------------------ */
+side-panel {
+  width: 300px; 
+  display: none;
+   z-index: 1050;
+  
+}
+
+.side-panel.open {
+  right: 0;              /* Slide in from right */
+}
+#userSidePanel {
+  transition: transform 0.5s ease-in-out;
+}
